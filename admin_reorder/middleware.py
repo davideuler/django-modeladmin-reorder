@@ -85,7 +85,10 @@ class ModelAdminReorder(MiddlewareMixin):
                             'a "app" name. Got %s' % repr(app_config))
 
         app = self.find_app(app_config['app'])
-        if app:
+        if not app:
+            print("config not found for app configured: ", app_config['app'])
+            print('app_list in django: ', self.app_list)
+        else:
             app = deepcopy(app)
             # Rename app
             if 'label' in app_config:
